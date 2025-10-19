@@ -2,21 +2,20 @@
 /* VARIÁVEIS DE DESIGN
 /* ================================================================ */
 :root {
-    /* --- NOVO: CONTROLE DE LARGURA DAS COLUNAS --- */
-    /* Ajuste as larguras aqui. A soma deve ser 100%. */
+    /* --- CONTROLE DE LARGURA DAS COLUNAS --- */
     --largura-col-colaboradores: 40%; 
     --largura-col-ass-dss: 20%;
     --largura-col-estou-bem: 20%;
-    --largura-col-estou-mal: 80%;
+    --largura-col-estou-mal: 20%;
     
     /* --- CONTROLE DE TAMANHO --- */
-    --largura-maxima-painel: 300px; /* Largura total */
+    --largura-maxima-painel: 900px; 
     --altura-linha-nome: 40px;      
     --altura-linha-matricula: 30px; 
     
     /* --- CONTROLE DAS BORDAS --- */
-    --espessura-borda-separadora: 2px;
-    --cor-borda-separadora: #000000; /* Cor branca */
+    --espessura-borda-separadora: 4px;
+    --cor-borda-separadora: #ffffff; 
 
     /* Cores */
     --cor-fundo-app: #c8e6c9; 
@@ -57,6 +56,9 @@ body {
     border-radius: var(--raio-borda);
     overflow: hidden; 
     box-shadow: 0 8px 25px var(--cor-sombra);
+
+    /* --- MUDANÇA SOLICITADA: BORDA PRETA 2PX --- */
+    border: 2px solid #000000;
 }
 
 table {
@@ -84,7 +86,6 @@ th {
     margin-bottom: 5px;
 }
 
-/* --- MUDANÇA: LARGURAS APLICADAS --- */
 .col-colaboradores { 
     background-color: var(--cor-colaboradores); 
     width: var(--largura-col-colaboradores);
@@ -148,28 +149,24 @@ td {
 }
 
 /* ================================================================ */
-/* --- CORREÇÃO: LÓGICA DAS BORDAS ---
-/* Aplicando bordas verticais grossas apenas onde devem estar
+/* LÓGICA DAS BORDAS SEPARADORAS
 /* ================================================================ */
 
-/* Cabeçalhos */
 .col-colaboradores, 
 .col-ass-dss, 
 .col-estou-bem {
     border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
 }
 
-/* Linha 1 (Nome e Checkboxes) */
 .cell-nome,
-tr td:nth-child(2).cell-check, /* Célula ASS.DSS */
-tr td:nth-child(3).cell-check  /* Célula ESTOU BEM */
+tr td:nth-child(2).cell-check, 
+tr td:nth-child(3).cell-check
 {
     border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
 }
 
-/* Linha 2 (Matrícula e Timestamps) */
-.cell-matricula-vazio, /* Fim da coluna "Colaboradores" */
-.cell-espaco-inferior  /* Fim da coluna "Estou Bem" (mesclada) */
+.cell-matricula-vazio,
+.cell-espaco-inferior
 {
     border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
 }
