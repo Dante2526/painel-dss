@@ -1,33 +1,39 @@
 /* ================================================================ */
-/* CONTROLE DE REDIMENSIONAMENTO
+/* CONTROLE DE ESTILO
 /* ================================================================ */
 :root {
     /* Cores */
     --cor-bloco1: #ff9900;  /* Laranja */
     --cor-bloco2: #999999;  /* Cinza */
     --cor-bloco3: #00ff00;  /* Verde */
-
-    /* Geral */
-    --espaco-entre-blocos: 20px;
 }
 /* ================================================================ */
 
-body {
+body, html {
     font-family: 'Inter', Arial, sans-serif;
-    background-color: #c8e6c9; 
+    background-color: #c8e6c9; /* Fundo verde */
     margin: 0;
-    padding: 20px; 
+    padding: 0; 
+    
+    /* MUITO IMPORTANTE: Esconde as barras de rolagem do navegador */
+    overflow: hidden; 
+    width: 100vw;
+    height: 100vh;
 }
 
-.painel-container {
-    display: flex;
-    justify-content: center; 
-    gap: var(--espaco-entre-blocos);
-    flex-wrap: wrap; /* Permite que os blocos quebrem a linha */
+/* O "mundo" que se move (Pan/Zoom) */
+#canvas {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    /* O JS vai aplicar 'transform' aqui para o zoom */
 }
 
 /* Classe genérica para TODOS os blocos */
 .bloco {
+    /* --- MUDANÇA CRÍTICA: POSIÇÃO ABSOLUTA --- */
+    position: absolute; /* Permite flutuar e ser arrastado */
+    
     /* --- O VISUAL --- */
     border: 2px solid #000000;       
     color: #ffffff;                  
@@ -42,14 +48,12 @@ body {
     font-size: 20px;
     
     /* --- TAMANHOS INICIAIS --- */
-    /* O JS vai ler isso e permitir a mudança */
     width: 300px;
     height: 400px;
     
     /* --- IMPORTANTE PARA O TOQUE NO CELULAR --- */
     touch-action: none; /* Impede o navegador de rolar a página */
-    
-    /* As linhas 'resize: both' e 'overflow: auto' foram REMOVIDAS */
+    box-sizing: border-box; /* Garante que a borda não aumente o tamanho */
 }
 
 /* Bloco 1: Colaboradores */
