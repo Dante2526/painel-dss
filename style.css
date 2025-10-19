@@ -3,13 +3,13 @@
 /* ================================================================ */
 :root {
     /* --- NOVO: CONTROLE DE TAMANHO --- */
-    --largura-maxima-painel: 500px; /* Largura total da tabela */
-    --altura-linha-nome: 50px;      /* Altura da linha do nome */
+    --largura-maxima-painel: 900px; /* Largura total da tabela */
+    --altura-linha-nome: 40px;      /* Altura da linha do nome */
     --altura-linha-matricula: 30px; /* Altura da linha da matrícula */
     
     /* --- NOVO: CONTROLE DAS BORDAS --- */
-    --espessura-borda-separadora: 3px;
-    --cor-borda-separadora: #000000; /* Cor branca para "cortar" */
+    --espessura-borda-separadora: 4px;
+    --cor-borda-separadora: #ffffff; /* Cor branca para "cortar" */
 
     /* Cores */
     --cor-fundo-app: #c8e6c9; 
