@@ -1,28 +1,28 @@
 /* ================================================================ */
-/* VARIÁVEIS DE DESIGN (Inspirado na sua imagem)
+/* VARIÁVEIS DE DESIGN
 /* ================================================================ */
 :root {
-    --cor-fundo-app: #c8e6c9; /* Verde claro da imagem */
+    --cor-fundo-app: #c8e6c9; 
     --cor-painel: #ffffff;
     --cor-sombra: rgba(0, 0, 0, 0.1);
     --cor-borda-separadora: #eeeeee;
     
     --cor-colaboradores: #ff9900;
     --cor-ass-dss: #999999;
-    --cor-estou-bem: #00ff00; /* Verde vivo */
-    --cor-estou-mal: #ff0000; /* Vermelho vivo */
+    --cor-estou-bem: #00ff00;
+    --cor-estou-mal: #ff0000;
     
-    --cor-texto-padrao: #333;
+    --cor-texto-padrao: #333; /* <-- USADO PARA O "PRETO" */
     --cor-texto-cabecalho: #ffffff;
     
-    --raio-borda: 16px; /* Borda bem arredondada */
+    --raio-borda: 16px; 
 }
 
 /* ================================================================ */
 /* ESTRUTURA PRINCIPAL
 /* ================================================================ */
 body {
-    font-family: 'Inter', Arial, sans-serif; /* Nova fonte */
+    font-family: 'Inter', Arial, sans-serif; 
     background-color: var(--cor-fundo-app);
     color: var(--cor-texto-padrao);
     margin: 0;
@@ -36,19 +36,18 @@ body {
     min-height: 100vh;
 }
 
-/* O "Wrapper" mágico */
 .painel-wrapper {
     width: 100%;
     max-width: 900px;
     margin: 20px auto;
     border-radius: var(--raio-borda);
-    overflow: hidden; /* Isso "recorta" a tabela para dentro das bordas */
+    overflow: hidden; 
     box-shadow: 0 8px 25px var(--cor-sombra);
 }
 
 table {
     width: 100%;
-    border-collapse: collapse; /* Remove espaços entre células */
+    border-collapse: collapse; 
     background-color: var(--cor-painel);
 }
 
@@ -57,7 +56,7 @@ table {
 /* ================================================================ */
 th {
     color: var(--cor-texto-cabecalho);
-    font-weight: 700; /* Mais forte (Bold) */
+    font-weight: 700; 
     text-transform: uppercase;
     font-size: 13px;
     padding: 12px 8px;
@@ -71,10 +70,9 @@ th {
     margin-bottom: 5px;
 }
 
-/* Cores dos cabeçalhos */
 .col-colaboradores { background-color: var(--cor-colaboradores); }
 .col-ass-dss { background-color: var(--cor-ass-dss); }
-.col-estou-bem { background-color: var(--cor-estou-bem); color: #333; } /* Texto escuro no verde claro */
+.col-estou-bem { background-color: var(--cor-estou-bem); color: #333; } 
 .col-estou-mal { background-color: var(--cor-estou-mal); }
 
 /* ================================================================ */
@@ -85,55 +83,59 @@ td {
     text-align: center;
     padding: 8px;
     box-sizing: border-box;
-    /* Removemos TODAS as bordas pretas antigas */
     border: none; 
-    /* Adicionamos uma borda fina na parte inferior para separar as linhas */
     border-bottom: 1px solid var(--cor-borda-separadora);
 }
 
 /* Célula de Nome */
 .cell-nome {
     text-align: left;
-    font-weight: 500;
     padding-left: 15px;
     font-size: 15px;
-    background-color: #fdfdfd; /* Fundo levemente diferente */
+    /* --- MUDANÇA SOLICITADA --- */
+    background-color: #ffffff; /* Fundo branco */
+    font-weight: 700;          /* Negrito */
+    color: var(--cor-texto-padrao); /* Preto (cinza escuro) */
 }
 
 /* Célula de Matrícula */
 .cell-matricula {
-    background-color: #fdfdfd;
-    font-weight: 500;
     text-align: left;
     padding-left: 15px;
     font-size: 13px;
-    color: #555;
+    /* --- MUDANÇA SOLICITADA --- */
+    background-color: #ffffff; /* Fundo branco */
+    font-weight: 700;          /* Negrito */
+    color: var(--cor-texto-padrao); /* Preto (cinza escuro) */
 }
 
 /* Células de Checkbox */
 .cell-check {
-    background-color: var(--cor-painel);
+    /* --- MUDANÇA SOLICITADA --- */
+    background-color: #ffffff; /* Fundo branco */
 }
 
 /* Células de Timestamp */
 .cell-espaco-inferior {
     font-size: 12px;
-    font-weight: 500;
-    color: #666;
     text-align: center;
-    background-color: #fdfdfd;
+    /* --- MUDANÇA SOLICITADA --- */
+    background-color: #ffffff; /* Fundo branco */
+    font-weight: 500;          /* Peso normal para o timestamp */
+    color: var(--cor-texto-padrao); /* Preto (cinza escuro) */
 }
 
 /* ================================================================ */
 /* ESTADOS VISUAIS (Cores dinâmicas)
 /* ================================================================ */
 
-/* Mantemos as regras de cor quando um checkbox é marcado */
+/* Mantemos as regras de cor para feedback quando um checkbox é marcado */
+/* Elas são ATIVADAS quando o checkbox é clicado */
 .cell-check.ass-dss-marcado { background-color: #f0f0f0 !important; }
 .cell-check.estou-bem-marcado { background-color: #e0ffe0 !important; }
 .cell-check.estou-mal-marcado { background-color: #ffe0e0 !important; }
 
-/* Verde/Vermelho no nome */
+/* Verde/Vermelho no nome (continua funcionando) */
 .cell-nome.estado-positivo { 
     background-color: var(--cor-estou-bem) !important; 
     color: #333 !important; 
@@ -152,7 +154,7 @@ td {
 .highlighted-block .cell-matricula-vazio,
 .highlighted-block .cell-espaco-inferior,
 .highlighted-block .cell-timestamp {
-    background-color: #fffde7 !important; /* Um amarelo bem claro */
+    background-color: #fffde7 !important; 
     color: black !important;
 }
 
@@ -161,31 +163,34 @@ td {
 /* ================================================================ */
 .cell-em-branco {
     padding: 0;
-    height: 10px; /* Mantém o espaçador */
+    height: 10px; 
     border: none;
-    background-color: #f9f9f9;
+    /* --- MUDANÇA SOLICITADA --- */
+    background-color: #ffffff; /* Fundo branco */
 }
 .cell-matricula-vazio {
-    background-color: #fdfdfd;
     border: none;
     border-bottom: 1px solid var(--cor-borda-separadora);
+    /* --- MUDANÇA SOLICITADA --- */
+    background-color: #ffffff; /* Fundo branco */
 }
 .cell-timestamp {
-    background-color: #fdfdfd;
     border: none;
     border-bottom: 1px solid var(--cor-borda-separadora);
+    /* --- MUDANÇA SOLICITADA --- */
+    background-color: #ffffff; /* Fundo branco */
 }
 
 /* Coluna e Célula Fantasma (totalmente escondidas) */
 .col-fantasma, .cell-fantasma {
-    display: none; /* Simplesmente escondemos elas */
+    display: none; 
 }
 
 /* ================================================================ */
 /* OUTROS ELEMENTOS (Checkbox, Loading)
 /* ================================================================ */
 
-/* Checkbox (um visual mais limpo) */
+/* Checkbox (estilo limpo) */
 input[type="checkbox"] {
     width: 20px;
     height: 20px;
@@ -228,5 +233,5 @@ input[type="checkbox"]:hover {
     padding: 6px 12px;
     border-radius: 20px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    display: none; /* Começa escondido */
+    display: none; 
 }
