@@ -3,8 +3,18 @@
 /* (É aqui que você muda o tamanho)
 /* ================================================================ */
 :root {
-    --bloco-largura: 250px;
-    --bloco-altura: 80px;
+    /* Bloco 1 */
+    --bloco1-largura: 250px;
+    --bloco1-altura: 80px;
+    --cor-bloco1: #ff9900;
+
+    /* Bloco 2 (NOVO) */
+    --bloco2-largura: 300px;
+    --bloco2-altura: 400px;
+    --cor-bloco2: #999999; /* Cor cinza do ASS.DSS */
+
+    /* Geral */
+    --espaco-entre-blocos: 20px;
 }
 /* ================================================================ */
 
@@ -12,33 +22,44 @@ body {
     font-family: 'Inter', Arial, sans-serif;
     background-color: #c8e6c9; /* Fundo verde */
     margin: 0;
-    padding: 0;
-    
-    /* Centraliza o bloco na tela (só para teste) */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    padding: 20px; /* Adiciona um espaço nas bordas da tela */
 }
 
-.bloco-colaboradores {
-    /* --- O CONTROLE VEM DAQUI --- */
-    width: var(--bloco-largura);
-    height: var(--bloco-altura);
+/* NOVO: Contêiner para alinhar os blocos */
+.painel-container {
+    display: flex;
+    justify-content: center; /* Centraliza os blocos na página */
+    gap: var(--espaco-entre-blocos); /* Espaço entre os blocos */
+}
 
+/* NOVO: Classe genérica para TODOS os blocos */
+.bloco {
     /* --- O VISUAL QUE VOCÊ PEDIU --- */
-    background-color: #ff9900;       /* Cor de fundo */
     border: 2px solid #000000;       /* Borda preta 2px */
     color: #ffffff;                  /* Cor do texto (branca) */
     font-weight: 700;                /* Negrito */
     text-transform: uppercase;       /* Caixa alta */
 
     /* --- ESTILO DE CORTE (ARREDONDADO) --- */
-    border-radius: 16px;             /* "Corte" arredondado */
+    border-radius: 16px;             
     
     /* --- Alinhamento do texto (só para ficar bonito) --- */
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 20px;
+}
+
+/* Bloco 1: Colaboradores */
+.bloco-colaboradores {
+    width: var(--bloco1-largura);
+    height: var(--bloco1-altura);
+    background-color: var(--cor-bloco1);
+}
+
+/* Bloco 2: ASS.DSS (NOVO) */
+.bloco-assdss {
+    width: var(--bloco2-largura);
+    height: var(--bloco2-altura);
+    background-color: var(--cor-bloco2);
 }
