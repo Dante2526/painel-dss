@@ -1,6 +1,6 @@
 // ========================== CONFIGURAÇÃO ==========================
 // 👇 COLE A URL DA SUA API AQUI DENTRO DAS ASPAS! 👇
-const URL_DA_API = "https://script.google.com/macros/s/AKfycbwlPghPIXIhZovTCMI71l49ANUb4Cf-hh_tbXT2vUq5O2LLpJkx7Om_nOB6r4Xa2ML0/exec";
+const URL_DA_API = "https://script.google.com/macros/s/AKfycbxt_Y66WOTrBdP7jyLAZAsQCfIRrcsskJ6c3E-ehQH2N27W77ohgIBkO72NiNMOJgsI/exec";
 
 // Elementos da página
 const tbody = document.getElementById('employee-table-body');
@@ -140,3 +140,4 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(carregarFuncionarios, 10000); // Atualiza a cada 10 segundos
 
 });
+
