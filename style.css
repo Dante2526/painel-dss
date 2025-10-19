@@ -7,15 +7,15 @@
     --largura-col-colaboradores: 40%; 
     --largura-col-ass-dss: 20%;
     --largura-col-estou-bem: 20%;
-    --largura-col-estou-mal: 50%;
+    --largura-col-estou-mal: 80%;
     
     /* --- CONTROLE DE TAMANHO --- */
-    --largura-maxima-painel: 500px; /* Largura total */
+    --largura-maxima-painel: 300px; /* Largura total */
     --altura-linha-nome: 40px;      
     --altura-linha-matricula: 30px; 
     
     /* --- CONTROLE DAS BORDAS --- */
-    --espessura-borda-separadora: 3px;
+    --espessura-borda-separadora: 2px;
     --cor-borda-separadora: #000000; /* Cor branca */
 
     /* Cores */
