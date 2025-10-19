@@ -2,29 +2,33 @@
 /* VARIÁVEIS DE DESIGN
 /* ================================================================ */
 :root {
-    /* --- NOVO: CONTROLE DE TAMANHO --- */
-    --largura-maxima-painel: 900px; /* Largura total da tabela */
-    --altura-linha-nome: 40px;      /* Altura da linha do nome */
-    --altura-linha-matricula: 30px; /* Altura da linha da matrícula */
+    /* --- NOVO: CONTROLE DE LARGURA DAS COLUNAS --- */
+    /* Ajuste as larguras aqui. A soma deve ser 100%. */
+    --largura-col-colaboradores: 40%; 
+    --largura-col-ass-dss: 20%;
+    --largura-col-estou-bem: 20%;
+    --largura-col-estou-mal: 20%;
     
-    /* --- NOVO: CONTROLE DAS BORDAS --- */
+    /* --- CONTROLE DE TAMANHO --- */
+    --largura-maxima-painel: 900px; /* Largura total */
+    --altura-linha-nome: 40px;      
+    --altura-linha-matricula: 30px; 
+    
+    /* --- CONTROLE DAS BORDAS --- */
     --espessura-borda-separadora: 4px;
-    --cor-borda-separadora: #ffffff; /* Cor branca para "cortar" */
+    --cor-borda-separadora: #ffffff; /* Cor branca */
 
     /* Cores */
     --cor-fundo-app: #c8e6c9; 
     --cor-painel: #ffffff;
     --cor-sombra: rgba(0, 0, 0, 0.1);
-    --cor-borda-linha-inferior: #eeeeee; /* Borda fina entre linhas */
-    
+    --cor-borda-linha-inferior: #eeeeee; 
     --cor-colaboradores: #ff9900;
     --cor-ass-dss: #999999;
     --cor-estou-bem: #00ff00;
     --cor-estou-mal: #ff0000;
-    
     --cor-texto-padrao: #333; 
     --cor-texto-cabecalho: #ffffff;
-    
     --raio-borda: 16px; 
 }
 
@@ -48,7 +52,6 @@ body {
 
 .painel-wrapper {
     width: 100%;
-    /* --- MUDANÇA: LARGURA CONTROLADA POR VARIÁVEL --- */
     max-width: var(--largura-maxima-painel); 
     margin: 20px auto;
     border-radius: var(--raio-borda);
@@ -73,13 +76,6 @@ th {
     padding: 12px 8px;
     vertical-align: middle;
     border: none;
-    /* --- MUDANÇA: Borda grossa à direita --- */
-    border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
-}
-
-/* Remove a borda do último cabeçalho */
-th:last-child {
-    border-right: none;
 }
 
 .icon {
@@ -88,10 +84,24 @@ th:last-child {
     margin-bottom: 5px;
 }
 
-.col-colaboradores { background-color: var(--cor-colaboradores); }
-.col-ass-dss { background-color: var(--cor-ass-dss); }
-.col-estou-bem { background-color: var(--cor-estou-bem); color: #333; } 
-.col-estou-mal { background-color: var(--cor-estou-mal); }
+/* --- MUDANÇA: LARGURAS APLICADAS --- */
+.col-colaboradores { 
+    background-color: var(--cor-colaboradores); 
+    width: var(--largura-col-colaboradores);
+}
+.col-ass-dss { 
+    background-color: var(--cor-ass-dss); 
+    width: var(--largura-col-ass-dss);
+}
+.col-estou-bem { 
+    background-color: var(--cor-estou-bem); 
+    color: #333; 
+    width: var(--largura-col-estou-bem);
+} 
+.col-estou-mal { 
+    background-color: var(--cor-estou-mal); 
+    width: var(--largura-col-estou-mal);
+}
 
 /* ================================================================ */
 /* CÉLULAS DE DADOS (Células)
@@ -103,16 +113,8 @@ td {
     box-sizing: border-box;
     border: none; 
     border-bottom: 1px solid var(--cor-borda-linha-inferior);
-    /* --- MUDANÇA: Borda grossa à direita --- */
-    border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
 }
 
-/* Remove a borda da última célula de cada linha */
-tr td:last-child {
-    border-right: none;
-}
-
-/* Célula de Nome */
 .cell-nome {
     text-align: left;
     padding-left: 15px;
@@ -120,11 +122,9 @@ tr td:last-child {
     background-color: #ffffff; 
     font-weight: 700;          
     color: var(--cor-texto-padrao); 
-    /* --- MUDANÇA: ALTURA CONTROLADA POR VARIÁVEL --- */
     height: var(--altura-linha-nome);
 }
 
-/* Célula de Matrícula */
 .cell-matricula {
     text-align: left;
     padding-left: 15px;
@@ -132,22 +132,46 @@ tr td:last-child {
     background-color: #ffffff; 
     font-weight: 700;          
     color: var(--cor-texto-padrao);
-    /* --- MUDANÇA: ALTURA CONTROLADA POR VARIÁVEL --- */
     height: var(--altura-linha-matricula); 
 }
 
-/* Células de Checkbox */
 .cell-check {
     background-color: #ffffff; 
 }
 
-/* Células de Timestamp */
 .cell-espaco-inferior {
     font-size: 12px;
     text-align: center;
     background-color: #ffffff; 
     font-weight: 500;          
     color: var(--cor-texto-padrao); 
+}
+
+/* ================================================================ */
+/* --- CORREÇÃO: LÓGICA DAS BORDAS ---
+/* Aplicando bordas verticais grossas apenas onde devem estar
+/* ================================================================ */
+
+/* Cabeçalhos */
+.col-colaboradores, 
+.col-ass-dss, 
+.col-estou-bem {
+    border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
+}
+
+/* Linha 1 (Nome e Checkboxes) */
+.cell-nome,
+tr td:nth-child(2).cell-check, /* Célula ASS.DSS */
+tr td:nth-child(3).cell-check  /* Célula ESTOU BEM */
+{
+    border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
+}
+
+/* Linha 2 (Matrícula e Timestamps) */
+.cell-matricula-vazio, /* Fim da coluna "Colaboradores" */
+.cell-espaco-inferior  /* Fim da coluna "Estou Bem" (mesclada) */
+{
+    border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
 }
 
 /* ================================================================ */
@@ -177,22 +201,16 @@ tr td:last-child {
     height: 10px; 
     border: none;
     background-color: #ffffff; 
-    /* --- MUDANÇA: Borda grossa à direita --- */
-    border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
 }
 .cell-matricula-vazio {
     border: none;
     border-bottom: 1px solid var(--cor-borda-linha-inferior);
-    background-color: #ffffff;
-    /* --- MUDANÇA: Borda grossa à direita --- */
-    border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
+    background-color: #ffffff; 
 }
 .cell-timestamp {
     border: none;
     border-bottom: 1px solid var(--cor-borda-linha-inferior);
     background-color: #ffffff; 
-    /* --- MUDANÇA: Borda grossa à direita --- */
-    border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
 }
 
 /* ================================================================ */
