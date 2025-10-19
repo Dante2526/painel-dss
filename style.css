@@ -9,7 +9,7 @@
     
     /* --- NOVO: CONTROLE DAS BORDAS --- */
     --espessura-borda-separadora: 4px;
-    --cor-borda-separadora: #ffffff; /* Cor branca para "cortar" */
+    --cor-borda-separadora: #000000; /* Cor branca para "cortar" */
 
     /* Cores */
     --cor-fundo-app: #c8e6c9; 
