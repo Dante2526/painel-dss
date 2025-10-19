@@ -9,12 +9,12 @@
     --cor-bloco1: #ff9900;
 
     /* Bloco 2 (NOVO) */
-    --bloco2-largura: 300px;
-    --bloco2-altura: 400px;
+    --bloco2-largura: 250px;
+    --bloco2-altura: 80px;
     --cor-bloco2: #999999; /* Cor cinza do ASS.DSS */
 
     /* Geral */
-    --espaco-entre-blocos: 20px;
+    --espaco-entre-blocos: 5px;
 }
 /* ================================================================ */
 
