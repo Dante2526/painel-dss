@@ -4,25 +4,33 @@
     <base target="_top">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Acompanhamento DSS</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="loading" id="loading-indicator">Atualizando...</div>
-    <table>
-        <thead>
-            <tr>
-                <th colspan="2" class="col-colaboradores"><span class="icon">👥</span>COLABORADORES</th>
-                <th class="col-ass-dss"><span class="icon">📄</span>ASS.DSS</th>
-                <th class="col-estou-bem"><span class="icon">🙂</span>ESTOU BEM</th>
-                <th class="col-estou-mal"><span class="icon">😟</span>NÃO ESTOU BEM</th>
-                <th class="col-fantasma"></th>
-            </tr>
-        </thead>
-        <tbody id="employee-table-body">
-            <tr><td colspan="6">Carregando...</td></tr>
-        </tbody>
-    </table>
 
-    <script src="script.js"></script>
+    <div class="app-container">
+
+        <div class="painel-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2" class="col-colaboradores"><span class="icon">👥</span>COLABORADORES</th>
+                        <th class="col-ass-dss"><span class="icon">📄</span>ASS.DSS</th>
+                        <th class="col-estou-bem"><span class="icon">🙂</span>ESTOU BEM</th>
+                        <th class="col-estou-mal"><span class="icon">😟</span>NÃO ESTOU BEM</th>
+                        <th class="col-fantasma"></th>
+                    </tr>
+                </thead>
+                <tbody id="employee-table-body">
+                    </tbody>
+            </table>
+        </div> <div class="loading" id="loading-indicator">Carregando...</div>
+
+    </div> <script src="script.js"></script>
 </body>
 </html>
