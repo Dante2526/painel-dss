@@ -1,0 +1,193 @@
+:root {
+    --largura-maxima-tabela: 900px;
+    --largura-matricula: 10%;
+    --largura-matricula-vazio: 10%;
+    --largura-ass-dss: 23%;
+    --largura-estou-bem: 23%;
+    --largura-estou-mal: 24%;
+    --largura-coluna-fantasma: 0;
+    --altura-linha-nome: 30px;
+    --altura-linha-em-branco: 10px;
+    --alinhamento-novo-checkbox: left;
+    --cor-da-borda: #000000;
+    --espessura-da-borda: 2px;
+    --cor-fundo-timestamp: #b45f06;
+    --altura-linha-matricula-timestamp: 12px;
+    --cor-espaco-em-branco: #ffffff;
+    --posicao-vertical-checkbox-fantasma: middle;
+    --padding-esquerdo-checkbox-fantasma: 0;
+    --padding-direito-checkbox-fantasma: 0;
+    --tamanho-fonte-timestamp: 12px;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+table {
+    width: 100%;
+    max-width: var(--largura-maxima-tabela);
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+th, td {
+    border: var(--espessura-da-borda) solid var(--cor-da-borda);
+    vertical-align: middle;
+    text-align: center;
+    padding: 8px;
+    box-sizing: border-box;
+}
+th {
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+.col-colaboradores { background-color: #ff9900; }
+.col-ass-dss { background-color: #999999; color: #333; width: var(--largura-ass-dss); }
+.col-estou-bem { background-color: #00ff00; color: #333; width: var(--largura-estou-bem); }
+.col-estou-mal { background-color: #ff0000; width: var(--largura-estou-mal); }
+.icon { font-size: 20px; display: block; margin-bottom: 5px; }
+.cell-nome {
+    background-color: #7f8c8d;
+    color: #fff;
+    text-align: left;
+    font-weight: bold;
+    padding-left: 15px;
+    font-size: 15px;
+    height: var(--altura-linha-nome);
+    border-right: var(--espessura-da-borda) solid var(--cor-da-borda);
+}
+.cell-check {
+    background-color: #fff;
+    height: var(--altura-linha-nome);
+}
+.cell-check.ass-dss-marcado { background-color: #999999 !important; }
+.cell-check.estou-bem-marcado { background-color: #00ff00 !important; }
+.cell-check.estou-mal-marcado { background-color: #ff0000 !important; }
+.cell-nome.estado-positivo { background-color: #00ff00 !important; color: #333 !important; }
+.cell-nome.estado-negativo { background-color: #ff0000 !important; color: #fff !important; }
+.cell-em-branco {
+    padding: 0;
+    height: var(--altura-linha-em-branco);
+    border: none;
+    background-color: var(--cor-espaco-em-branco);
+}
+.cell-matricula {
+    background-color: #95a5a6;
+    color: #fff;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 15px;
+    font-size: 13px;
+    height: var(--altura-linha-matricula-timestamp);
+}
+.cell-matricula-vazio {
+    background-color: #ffffff;
+    width: var(--largura-matricula-vazio);
+    border-bottom-style: hidden;
+    border-right: none;
+}
+.cell-espaco-inferior {
+    background-color: var(--cor-fundo-timestamp);
+    height: var(--altura-linha-matricula-timestamp);
+    border-right: var(--espessura-da-borda) solid var(--cor-da-borda);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: var(--tamanho-fonte-timestamp);
+    text-align: center;
+}
+.cell-timestamp {
+    height: var(--altura-linha-matricula-timestamp);
+    font-size: 11px;
+    font-weight: bold;
+    background-color: var(--cor-fundo-timestamp);
+    color: #ffffff;
+    border-right: var(--espessura-da-borda) solid var(--cor-da-borda);
+}
+input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    border: 3px solid #000;
+    border-radius: 4px;
+    background-color: white;
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    transition: all 0.3s ease;
+}
+input[type="checkbox"]:checked {
+    background-color: #000;
+    border-color: #000;
+}
+input[type="checkbox"]:checked::after {
+    content: "✓";
+    position: absolute;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+input[type="checkbox"]:hover {
+    border-color: #333;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+input[type="checkbox"]:checked:hover {
+    background-color: #333;
+    border-color: #333;
+}
+.col-fantasma {
+    background-color: #ffffff !important;
+    width: var(--largura-coluna-fantasma);
+    border: none !important;
+}
+.cell-fantasma {
+    background-color: #ffffff !important;
+    text-align: var(--alinhamento-novo-checkbox);
+    border: none !important;
+    vertical-align: var(--posicao-vertical-checkbox-fantasma);
+    padding-left: var(--padding-esquerdo-checkbox-fantasma);
+    padding-right: var(--padding-direito-checkbox-fantasma);
+}
+.loading {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 12px;
+    color: #333;
+    display: none; /* Começa escondido */
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.highlighted-block .cell-nome,
+.highlighted-block .cell-check,
+.highlighted-block .cell-matricula,
+.highlighted-block .cell-matricula-vazio,
+.highlighted-block .cell-espaco-inferior,
+.highlighted-block .cell-timestamp {
+    background-color: yellow !important;
+    color: black !important;
+}
+.highlighted-block .cell-em-branco,
+.highlighted-block .cell-fantasma {
+    background-color: #ffffff !important;
+}
+.highlighted-block .cell-check input[type="checkbox"] {
+    background-color: yellow;
+}
+.highlighted-block .cell-check input[type="checkbox"]:checked {
+    background-color: #000;
+}
