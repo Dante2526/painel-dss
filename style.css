@@ -8,7 +8,7 @@
     --altura-linha-matricula: 30px; /* Altura da linha da matrícula */
     
     /* --- NOVO: CONTROLE DAS BORDAS --- */
-    --espessura-borda-separadora: 4px;
+    --espessura-borda-separadora: 2px;
     --cor-borda-separadora: #000000; /* Cor branca para "cortar" */
 
     /* Cores */
