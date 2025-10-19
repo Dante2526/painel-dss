@@ -1,193 +1,232 @@
+/* ================================================================ */
+/* VARIÁVEIS DE DESIGN (Inspirado na sua imagem)
+/* ================================================================ */
 :root {
-    --largura-maxima-tabela: 900px;
-    --largura-matricula: 10%;
-    --largura-matricula-vazio: 10%;
-    --largura-ass-dss: 23%;
-    --largura-estou-bem: 23%;
-    --largura-estou-mal: 70%;
-    --largura-coluna-fantasma: 0;
-    --altura-linha-nome: 30px;
-    --altura-linha-em-branco: 10px;
-    --alinhamento-novo-checkbox: left;
-    --cor-da-borda: #000000;
-    --espessura-da-borda: 2px;
-    --cor-fundo-timestamp: #b45f06;
-    --altura-linha-matricula-timestamp: 12px;
-    --cor-espaco-em-branco: #ffffff;
-    --posicao-vertical-checkbox-fantasma: middle;
-    --padding-esquerdo-checkbox-fantasma: 0;
-    --padding-direito-checkbox-fantasma: 0;
-    --tamanho-fonte-timestamp: 12px;
+    --cor-fundo-app: #c8e6c9; /* Verde claro da imagem */
+    --cor-painel: #ffffff;
+    --cor-sombra: rgba(0, 0, 0, 0.1);
+    --cor-borda-separadora: #eeeeee;
+    
+    --cor-colaboradores: #ff9900;
+    --cor-ass-dss: #999999;
+    --cor-estou-bem: #00ff00; /* Verde vivo */
+    --cor-estou-mal: #ff0000; /* Vermelho vivo */
+    
+    --cor-texto-padrao: #333;
+    --cor-texto-cabecalho: #ffffff;
+    
+    --raio-borda: 16px; /* Borda bem arredondada */
 }
+
+/* ================================================================ */
+/* ESTRUTURA PRINCIPAL
+/* ================================================================ */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    font-family: 'Inter', Arial, sans-serif; /* Nova fonte */
+    background-color: var(--cor-fundo-app);
+    color: var(--cor-texto-padrao);
     margin: 0;
-    padding: 8px;
+    padding: 20px;
+}
+
+.app-container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh;
 }
+
+/* O "Wrapper" mágico */
+.painel-wrapper {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-radius: var(--raio-borda);
+    overflow: hidden; /* Isso "recorta" a tabela para dentro das bordas */
+    box-shadow: 0 8px 25px var(--cor-sombra);
+}
+
 table {
     width: 100%;
-    max-width: var(--largura-maxima-tabela);
-    margin: 20px auto;
-    border-collapse: collapse;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    border-radius: 8px;
-    overflow: hidden;
+    border-collapse: collapse; /* Remove espaços entre células */
+    background-color: var(--cor-painel);
 }
-th, td {
-    border: var(--espessura-da-borda) solid var(--cor-da-borda);
+
+/* ================================================================ */
+/* CABEÇALHOS (Headers)
+/* ================================================================ */
+th {
+    color: var(--cor-texto-cabecalho);
+    font-weight: 700; /* Mais forte (Bold) */
+    text-transform: uppercase;
+    font-size: 13px;
+    padding: 12px 8px;
+    vertical-align: middle;
+    border: none;
+}
+
+.icon {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Cores dos cabeçalhos */
+.col-colaboradores { background-color: var(--cor-colaboradores); }
+.col-ass-dss { background-color: var(--cor-ass-dss); }
+.col-estou-bem { background-color: var(--cor-estou-bem); color: #333; } /* Texto escuro no verde claro */
+.col-estou-mal { background-color: var(--cor-estou-mal); }
+
+/* ================================================================ */
+/* CÉLULAS DE DADOS (Células)
+/* ================================================================ */
+td {
     vertical-align: middle;
     text-align: center;
     padding: 8px;
     box-sizing: border-box;
+    /* Removemos TODAS as bordas pretas antigas */
+    border: none; 
+    /* Adicionamos uma borda fina na parte inferior para separar as linhas */
+    border-bottom: 1px solid var(--cor-borda-separadora);
 }
-th {
-    color: #fff;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 13px;
-}
-.col-colaboradores { background-color: #ff9900; }
-.col-ass-dss { background-color: #999999; color: #333; width: var(--largura-ass-dss); }
-.col-estou-bem { background-color: #00ff00; color: #333; width: var(--largura-estou-bem); }
-.col-estou-mal { background-color: #ff0000; width: var(--largura-estou-mal); }
-.icon { font-size: 20px; display: block; margin-bottom: 5px; }
+
+/* Célula de Nome */
 .cell-nome {
-    background-color: #7f8c8d;
-    color: #fff;
     text-align: left;
-    font-weight: bold;
+    font-weight: 500;
     padding-left: 15px;
     font-size: 15px;
-    height: var(--altura-linha-nome);
-    border-right: var(--espessura-da-borda) solid var(--cor-da-borda);
+    background-color: #fdfdfd; /* Fundo levemente diferente */
 }
-.cell-check {
-    background-color: #fff;
-    height: var(--altura-linha-nome);
-}
-.cell-check.ass-dss-marcado { background-color: #999999 !important; }
-.cell-check.estou-bem-marcado { background-color: #00ff00 !important; }
-.cell-check.estou-mal-marcado { background-color: #ff0000 !important; }
-.cell-nome.estado-positivo { background-color: #00ff00 !important; color: #333 !important; }
-.cell-nome.estado-negativo { background-color: #ff0000 !important; color: #fff !important; }
-.cell-em-branco {
-    padding: 0;
-    height: var(--altura-linha-em-branco);
-    border: none;
-    background-color: var(--cor-espaco-em-branco);
-}
+
+/* Célula de Matrícula */
 .cell-matricula {
-    background-color: #95a5a6;
-    color: #fff;
-    font-weight: bold;
+    background-color: #fdfdfd;
+    font-weight: 500;
     text-align: left;
     padding-left: 15px;
     font-size: 13px;
-    height: var(--altura-linha-matricula-timestamp);
+    color: #555;
 }
-.cell-matricula-vazio {
-    background-color: #ffffff;
-    width: var(--largura-matricula-vazio);
-    border-bottom-style: hidden;
-    border-right: none;
+
+/* Células de Checkbox */
+.cell-check {
+    background-color: var(--cor-painel);
 }
+
+/* Células de Timestamp */
 .cell-espaco-inferior {
-    background-color: var(--cor-fundo-timestamp);
-    height: var(--altura-linha-matricula-timestamp);
-    border-right: var(--espessura-da-borda) solid var(--cor-da-borda);
-    color: #ffffff;
-    font-weight: bold;
-    font-size: var(--tamanho-fonte-timestamp);
-    text-align: center;
-}
-.cell-timestamp {
-    height: var(--altura-linha-matricula-timestamp);
-    font-size: 11px;
-    font-weight: bold;
-    background-color: var(--cor-fundo-timestamp);
-    color: #ffffff;
-    border-right: var(--espessura-da-borda) solid var(--cor-da-borda);
-}
-input[type="checkbox"] {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    border: 3px solid #000;
-    border-radius: 4px;
-    background-color: white;
-    appearance: none;
-    -webkit-appearance: none;
-    position: relative;
-    transition: all 0.3s ease;
-}
-input[type="checkbox"]:checked {
-    background-color: #000;
-    border-color: #000;
-}
-input[type="checkbox"]:checked::after {
-    content: "✓";
-    position: absolute;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-input[type="checkbox"]:hover {
-    border-color: #333;
-    box-shadow: 0 0 5px rgba(0,0,0,0.3);
-}
-input[type="checkbox"]:checked:hover {
-    background-color: #333;
-    border-color: #333;
-}
-.col-fantasma {
-    background-color: #ffffff !important;
-    width: var(--largura-coluna-fantasma);
-    border: none !important;
-}
-.cell-fantasma {
-    background-color: #ffffff !important;
-    text-align: var(--alinhamento-novo-checkbox);
-    border: none !important;
-    vertical-align: var(--posicao-vertical-checkbox-fantasma);
-    padding-left: var(--padding-esquerdo-checkbox-fantasma);
-    padding-right: var(--padding-direito-checkbox-fantasma);
-}
-.loading {
-    position: fixed;
-    top: 10px;
-    right: 10px;
     font-size: 12px;
-    color: #333;
-    display: none; /* Começa escondido */
-    background-color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    font-weight: 500;
+    color: #666;
+    text-align: center;
+    background-color: #fdfdfd;
 }
+
+/* ================================================================ */
+/* ESTADOS VISUAIS (Cores dinâmicas)
+/* ================================================================ */
+
+/* Mantemos as regras de cor quando um checkbox é marcado */
+.cell-check.ass-dss-marcado { background-color: #f0f0f0 !important; }
+.cell-check.estou-bem-marcado { background-color: #e0ffe0 !important; }
+.cell-check.estou-mal-marcado { background-color: #ffe0e0 !important; }
+
+/* Verde/Vermelho no nome */
+.cell-nome.estado-positivo { 
+    background-color: var(--cor-estou-bem) !important; 
+    color: #333 !important; 
+    font-weight: 700;
+}
+.cell-nome.estado-negativo { 
+    background-color: var(--cor-estou-mal) !important; 
+    color: #fff !important; 
+    font-weight: 700;
+}
+
+/* Destaque "Fantasma" */
 .highlighted-block .cell-nome,
 .highlighted-block .cell-check,
 .highlighted-block .cell-matricula,
 .highlighted-block .cell-matricula-vazio,
 .highlighted-block .cell-espaco-inferior,
 .highlighted-block .cell-timestamp {
-    background-color: yellow !important;
+    background-color: #fffde7 !important; /* Um amarelo bem claro */
     color: black !important;
 }
-.highlighted-block .cell-em-branco,
-.highlighted-block .cell-fantasma {
-    background-color: #ffffff !important;
+
+/* ================================================================ */
+/* CÉLULAS ESPECIAIS (Em branco, Fantasma)
+/* ================================================================ */
+.cell-em-branco {
+    padding: 0;
+    height: 10px; /* Mantém o espaçador */
+    border: none;
+    background-color: #f9f9f9;
 }
-.highlighted-block .cell-check input[type="checkbox"] {
-    background-color: yellow;
+.cell-matricula-vazio {
+    background-color: #fdfdfd;
+    border: none;
+    border-bottom: 1px solid var(--cor-borda-separadora);
 }
-.highlighted-block .cell-check input[type="checkbox"]:checked {
-    background-color: #000;
+.cell-timestamp {
+    background-color: #fdfdfd;
+    border: none;
+    border-bottom: 1px solid var(--cor-borda-separadora);
+}
+
+/* Coluna e Célula Fantasma (totalmente escondidas) */
+.col-fantasma, .cell-fantasma {
+    display: none; /* Simplesmente escondemos elas */
+}
+
+/* ================================================================ */
+/* OUTROS ELEMENTOS (Checkbox, Loading)
+/* ================================================================ */
+
+/* Checkbox (um visual mais limpo) */
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    transition: all 0.2s ease;
+}
+input[type="checkbox"]:checked {
+    background-color: var(--cor-texto-padrao);
+    border-color: var(--cor-texto-padrao);
+}
+input[type="checkbox"]:checked::after {
+    content: "✓";
+    position: absolute;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+input[type="checkbox"]:hover {
+    border-color: #999;
+}
+
+/* Indicador de Loading */
+.loading {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 6px 12px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: none; /* Começa escondido */
 }
