@@ -1,259 +1,44 @@
 /* ================================================================ */
-/* VARIÁVEIS DE DESIGN
+/* CONTROLE DE REDIMENSIONAMENTO
+/* (É aqui que você muda o tamanho)
 /* ================================================================ */
 :root {
-    /* --- CONTROLE DE LARGURA DAS COLUNAS --- */
-    --largura-col-colaboradores: 40%; 
-    --largura-col-ass-dss: 60%;
-    --largura-col-estou-bem: 60%;
-    --largura-col-estou-mal: 40%;
-    
-    /* --- CONTROLE DE TAMANHO --- */
-    --largura-maxima-painel: 900px; 
-    --altura-linha-nome: 40px;      
-    --altura-linha-matricula: 30px; 
-    
-    /* --- CONTROLE DAS BORDAS --- */
-    --espessura-borda-separadora: 4px;
-    --cor-borda-separadora: #ffffff; 
-
-    /* Cores */
-    --cor-fundo-app: #c8e6c9; 
-    --cor-painel: #ffffff;
-    --cor-sombra: rgba(0, 0, 0, 0.1);
-    --cor-borda-linha-inferior: #eeeeee; 
-    --cor-colaboradores: #ff9900;
-    --cor-ass-dss: #999999;
-    --cor-estou-bem: #00ff00;
-    --cor-estou-mal: #ff0000;
-    --cor-texto-padrao: #333; 
-    --cor-texto-cabecalho: #ffffff;
-    --raio-borda: 16px; 
+    --bloco-largura: 300px;
+    --bloco-altura: 400px;
 }
+/* ================================================================ */
 
-/* ================================================================ */
-/* ESTRUTURA PRINCIPAL
-/* ================================================================ */
 body {
-    font-family: 'Inter', Arial, sans-serif; 
-    background-color: var(--cor-fundo-app);
-    color: var(--cor-texto-padrao);
+    font-family: 'Inter', Arial, sans-serif;
+    background-color: #c8e6c9; /* Fundo verde */
     margin: 0;
-    padding: 20px;
-}
-
-.app-container {
+    padding: 0;
+    
+    /* Centraliza o bloco na tela (só para teste) */
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     min-height: 100vh;
 }
 
-.painel-wrapper {
-    width: 100%;
-    max-width: var(--largura-maxima-painel); 
-    margin: 20px auto;
-    border-radius: var(--raio-borda);
-    overflow: hidden; 
-    box-shadow: 0 8px 25px var(--cor-sombra);
+.bloco-colaboradores {
+    /* --- O CONTROLE VEM DAQUI --- */
+    width: var(--bloco-largura);
+    height: var(--bloco-altura);
 
-    /* --- MUDANÇA SOLICITADA: BORDA PRETA 2PX --- */
-    border: 2px solid #000000;
-}
+    /* --- O VISUAL QUE VOCÊ PEDIU --- */
+    background-color: #ff9900;       /* Cor de fundo */
+    border: 2px solid #000000;       /* Borda preta 2px */
+    color: #ffffff;                  /* Cor do texto (branca) */
+    font-weight: 700;                /* Negrito */
+    text-transform: uppercase;       /* Caixa alta */
 
-table {
-    width: 100%;
-    border-collapse: collapse; 
-    background-color: var(--cor-painel);
-}
-
-/* ================================================================ */
-/* CABEÇALHOS (Headers)
-/* ================================================================ */
-th {
-    color: var(--cor-texto-cabecalho);
-    font-weight: 700; 
-    text-transform: uppercase;
-    font-size: 13px;
-    padding: 12px 8px;
-    vertical-align: middle;
-    border: none;
-}
-
-.icon {
+    /* --- ESTILO DE CORTE (ARREDONDADO) --- */
+    border-radius: 16px;             /* "Corte" arredondado */
+    
+    /* --- Alinhamento do texto (só para ficar bonito) --- */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 20px;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.col-colaboradores { 
-    background-color: var(--cor-colaboradores); 
-    width: var(--largura-col-colaboradores);
-}
-.col-ass-dss { 
-    background-color: var(--cor-ass-dss); 
-    width: var(--largura-col-ass-dss);
-}
-.col-estou-bem { 
-    background-color: var(--cor-estou-bem); 
-    color: #333; 
-    width: var(--largura-col-estou-bem);
-} 
-.col-estou-mal { 
-    background-color: var(--cor-estou-mal); 
-    width: var(--largura-col-estou-mal);
-}
-
-/* ================================================================ */
-/* CÉLULAS DE DADOS (Células)
-/* ================================================================ */
-td {
-    vertical-align: middle;
-    text-align: center;
-    padding: 8px;
-    box-sizing: border-box;
-    border: none; 
-    border-bottom: 1px solid var(--cor-borda-linha-inferior);
-}
-
-.cell-nome {
-    text-align: left;
-    padding-left: 15px;
-    font-size: 15px;
-    background-color: #ffffff; 
-    font-weight: 700;          
-    color: var(--cor-texto-padrao); 
-    height: var(--altura-linha-nome);
-}
-
-.cell-matricula {
-    text-align: left;
-    padding-left: 15px;
-    font-size: 13px;
-    background-color: #ffffff; 
-    font-weight: 700;          
-    color: var(--cor-texto-padrao);
-    height: var(--altura-linha-matricula); 
-}
-
-.cell-check {
-    background-color: #ffffff; 
-}
-
-.cell-espaco-inferior {
-    font-size: 12px;
-    text-align: center;
-    background-color: #ffffff; 
-    font-weight: 500;          
-    color: var(--cor-texto-padrao); 
-}
-
-/* ================================================================ */
-/* LÓGICA DAS BORDAS SEPARADORAS
-/* ================================================================ */
-
-.col-colaboradores, 
-.col-ass-dss, 
-.col-estou-bem {
-    border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
-}
-
-.cell-nome,
-tr td:nth-child(2).cell-check, 
-tr td:nth-child(3).cell-check
-{
-    border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
-}
-
-.cell-matricula-vazio,
-.cell-espaco-inferior
-{
-    border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
-}
-
-/* ================================================================ */
-/* ESTADOS VISUAIS (Cores dinâmicas)
-/* ================================================================ */
-
-.cell-check.ass-dss-marcado { background-color: #f0f0f0 !important; }
-.cell-check.estou-bem-marcado { background-color: #e0ffe0 !important; }
-.cell-check.estou-mal-marcado { background-color: #ffe0e0 !important; }
-
-.cell-nome.estado-positivo { 
-    background-color: var(--cor-estou-bem) !important; 
-    color: #333 !important; 
-    font-weight: 700;
-}
-.cell-nome.estado-negativo { 
-    background-color: var(--cor-estou-mal) !important; 
-    color: #fff !important; 
-    font-weight: 700;
-}
-
-/* ================================================================ */
-/* CÉLULAS ESPECIAIS (Em branco)
-/* ================================================================ */
-.cell-em-branco {
-    padding: 0;
-    height: 10px; 
-    border: none;
-    background-color: #ffffff; 
-}
-.cell-matricula-vazio {
-    border: none;
-    border-bottom: 1px solid var(--cor-borda-linha-inferior);
-    background-color: #ffffff; 
-}
-.cell-timestamp {
-    border: none;
-    border-bottom: 1px solid var(--cor-borda-linha-inferior);
-    background-color: #ffffff; 
-}
-
-/* ================================================================ */
-/* OUTROS ELEMENTOS (Checkbox, Loading)
-/* ================================================================ */
-
-input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    appearance: none;
-    -webkit-appearance: none;
-    position: relative;
-    transition: all 0.2s ease;
-}
-input[type="checkbox"]:checked {
-    background-color: var(--cor-texto-padrao);
-    border-color: var(--cor-texto-padrao);
-}
-input[type="checkbox"]:checked::after {
-    content: "✓";
-    position: absolute;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-input[type="checkbox"]:hover {
-    border-color: #999;
-}
-
-.loading {
-    position: fixed;
-    top: 15px;
-    right: 20px;
-    font-size: 12px;
-    font-weight: 500;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 6px 12px;
-    border-radius: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    display: none; 
 }
