@@ -4,7 +4,7 @@
 /* ================================================================ */
 :root {
     /* Bloco 1 */
-    --bloco1-largura: 255px;
+    --bloco1-largura: 260px;
     --bloco1-altura: 80px;
     --cor-bloco1: #ff9900;
 
@@ -14,7 +14,7 @@
     --cor-bloco2: #999999; /* Cor cinza do ASS.DSS */
 
     /* Geral */
-    --espaco-entre-blocos: 2px;
+    --espaco-entre-blocos: 1px;
 }
 /* ================================================================ */
 
