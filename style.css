@@ -4,17 +4,17 @@
 /* ================================================================ */
 :root {
     /* Bloco 1 */
-    --bloco1-largura: 250px;
+    --bloco1-largura: 255px;
     --bloco1-altura: 80px;
     --cor-bloco1: #ff9900;
 
     /* Bloco 2 (NOVO) */
-    --bloco2-largura: 250px;
+    --bloco2-largura: 240px;
     --bloco2-altura: 80px;
     --cor-bloco2: #999999; /* Cor cinza do ASS.DSS */
 
     /* Geral */
-    --espaco-entre-blocos: 5px;
+    --espaco-entre-blocos: 2px;
 }
 /* ================================================================ */
 
