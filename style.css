@@ -15,8 +15,8 @@
     --altura-linha-matricula: 30px; 
     
     /* --- CONTROLE DAS BORDAS --- */
-    --espessura-borda-separadora: 4px;
-    --cor-borda-separadora: #ffffff; /* Cor branca */
+    --espessura-borda-separadora: 3px;
+    --cor-borda-separadora: #000000; /* Cor branca */
 
     /* Cores */
     --cor-fundo-app: #c8e6c9; 
