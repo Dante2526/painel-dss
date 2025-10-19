@@ -2,17 +2,27 @@
 /* VARIÁVEIS DE DESIGN
 /* ================================================================ */
 :root {
+    /* --- NOVO: CONTROLE DE TAMANHO --- */
+    --largura-maxima-painel: 900px; /* Largura total da tabela */
+    --altura-linha-nome: 40px;      /* Altura da linha do nome */
+    --altura-linha-matricula: 30px; /* Altura da linha da matrícula */
+    
+    /* --- NOVO: CONTROLE DAS BORDAS --- */
+    --espessura-borda-separadora: 4px;
+    --cor-borda-separadora: #ffffff; /* Cor branca para "cortar" */
+
+    /* Cores */
     --cor-fundo-app: #c8e6c9; 
     --cor-painel: #ffffff;
     --cor-sombra: rgba(0, 0, 0, 0.1);
-    --cor-borda-separadora: #eeeeee;
+    --cor-borda-linha-inferior: #eeeeee; /* Borda fina entre linhas */
     
     --cor-colaboradores: #ff9900;
     --cor-ass-dss: #999999;
     --cor-estou-bem: #00ff00;
     --cor-estou-mal: #ff0000;
     
-    --cor-texto-padrao: #333; /* <-- USADO PARA O "PRETO" */
+    --cor-texto-padrao: #333; 
     --cor-texto-cabecalho: #ffffff;
     
     --raio-borda: 16px; 
@@ -38,7 +48,8 @@ body {
 
 .painel-wrapper {
     width: 100%;
-    max-width: 900px;
+    /* --- MUDANÇA: LARGURA CONTROLADA POR VARIÁVEL --- */
+    max-width: var(--largura-maxima-painel); 
     margin: 20px auto;
     border-radius: var(--raio-borda);
     overflow: hidden; 
@@ -62,6 +73,13 @@ th {
     padding: 12px 8px;
     vertical-align: middle;
     border: none;
+    /* --- MUDANÇA: Borda grossa à direita --- */
+    border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
+}
+
+/* Remove a borda do último cabeçalho */
+th:last-child {
+    border-right: none;
 }
 
 .icon {
@@ -84,7 +102,14 @@ td {
     padding: 8px;
     box-sizing: border-box;
     border: none; 
-    border-bottom: 1px solid var(--cor-borda-separadora);
+    border-bottom: 1px solid var(--cor-borda-linha-inferior);
+    /* --- MUDANÇA: Borda grossa à direita --- */
+    border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
+}
+
+/* Remove a borda da última célula de cada linha */
+tr td:last-child {
+    border-right: none;
 }
 
 /* Célula de Nome */
@@ -92,10 +117,11 @@ td {
     text-align: left;
     padding-left: 15px;
     font-size: 15px;
-    /* --- MUDANÇA SOLICITADA --- */
-    background-color: #ffffff; /* Fundo branco */
-    font-weight: 700;          /* Negrito */
-    color: var(--cor-texto-padrao); /* Preto (cinza escuro) */
+    background-color: #ffffff; 
+    font-weight: 700;          
+    color: var(--cor-texto-padrao); 
+    /* --- MUDANÇA: ALTURA CONTROLADA POR VARIÁVEL --- */
+    height: var(--altura-linha-nome);
 }
 
 /* Célula de Matrícula */
@@ -103,39 +129,35 @@ td {
     text-align: left;
     padding-left: 15px;
     font-size: 13px;
-    /* --- MUDANÇA SOLICITADA --- */
-    background-color: #ffffff; /* Fundo branco */
-    font-weight: 700;          /* Negrito */
-    color: var(--cor-texto-padrao); /* Preto (cinza escuro) */
+    background-color: #ffffff; 
+    font-weight: 700;          
+    color: var(--cor-texto-padrao);
+    /* --- MUDANÇA: ALTURA CONTROLADA POR VARIÁVEL --- */
+    height: var(--altura-linha-matricula); 
 }
 
 /* Células de Checkbox */
 .cell-check {
-    /* --- MUDANÇA SOLICITADA --- */
-    background-color: #ffffff; /* Fundo branco */
+    background-color: #ffffff; 
 }
 
 /* Células de Timestamp */
 .cell-espaco-inferior {
     font-size: 12px;
     text-align: center;
-    /* --- MUDANÇA SOLICITADA --- */
-    background-color: #ffffff; /* Fundo branco */
-    font-weight: 500;          /* Peso normal para o timestamp */
-    color: var(--cor-texto-padrao); /* Preto (cinza escuro) */
+    background-color: #ffffff; 
+    font-weight: 500;          
+    color: var(--cor-texto-padrao); 
 }
 
 /* ================================================================ */
 /* ESTADOS VISUAIS (Cores dinâmicas)
 /* ================================================================ */
 
-/* Mantemos as regras de cor para feedback quando um checkbox é marcado */
-/* Elas são ATIVADAS quando o checkbox é clicado */
 .cell-check.ass-dss-marcado { background-color: #f0f0f0 !important; }
 .cell-check.estou-bem-marcado { background-color: #e0ffe0 !important; }
 .cell-check.estou-mal-marcado { background-color: #ffe0e0 !important; }
 
-/* Verde/Vermelho no nome (continua funcionando) */
 .cell-nome.estado-positivo { 
     background-color: var(--cor-estou-bem) !important; 
     color: #333 !important; 
@@ -147,50 +169,36 @@ td {
     font-weight: 700;
 }
 
-/* Destaque "Fantasma" */
-.highlighted-block .cell-nome,
-.highlighted-block .cell-check,
-.highlighted-block .cell-matricula,
-.highlighted-block .cell-matricula-vazio,
-.highlighted-block .cell-espaco-inferior,
-.highlighted-block .cell-timestamp {
-    background-color: #fffde7 !important; 
-    color: black !important;
-}
-
 /* ================================================================ */
-/* CÉLULAS ESPECIAIS (Em branco, Fantasma)
+/* CÉLULAS ESPECIAIS (Em branco)
 /* ================================================================ */
 .cell-em-branco {
     padding: 0;
     height: 10px; 
     border: none;
-    /* --- MUDANÇA SOLICITADA --- */
-    background-color: #ffffff; /* Fundo branco */
+    background-color: #ffffff; 
+    /* --- MUDANÇA: Borda grossa à direita --- */
+    border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
 }
 .cell-matricula-vazio {
     border: none;
-    border-bottom: 1px solid var(--cor-borda-separadora);
-    /* --- MUDANÇA SOLICITADA --- */
-    background-color: #ffffff; /* Fundo branco */
+    border-bottom: 1px solid var(--cor-borda-linha-inferior);
+    background-color: #ffffff;
+    /* --- MUDANÇA: Borda grossa à direita --- */
+    border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
 }
 .cell-timestamp {
     border: none;
-    border-bottom: 1px solid var(--cor-borda-separadora);
-    /* --- MUDANÇA SOLICITADA --- */
-    background-color: #ffffff; /* Fundo branco */
-}
-
-/* Coluna e Célula Fantasma (totalmente escondidas) */
-.col-fantasma, .cell-fantasma {
-    display: none; 
+    border-bottom: 1px solid var(--cor-borda-linha-inferior);
+    background-color: #ffffff; 
+    /* --- MUDANÇA: Borda grossa à direita --- */
+    border-right: var(--espessura-borda-separadora) solid var(--cor-borda-separadora);
 }
 
 /* ================================================================ */
 /* OUTROS ELEMENTOS (Checkbox, Loading)
 /* ================================================================ */
 
-/* Checkbox (estilo limpo) */
 input[type="checkbox"] {
     width: 20px;
     height: 20px;
@@ -221,7 +229,6 @@ input[type="checkbox"]:hover {
     border-color: #999;
 }
 
-/* Indicador de Loading */
 .loading {
     position: fixed;
     top: 15px;
