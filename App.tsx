@@ -247,6 +247,7 @@ const App: React.FC = () => {
     const [pendingEmployeeId, setPendingEmployeeId] = useState<string | null>(null);
     const [existingUserInfo, setExistingUserInfo] = useState<{ name: string; turma: string } | null>(null);
     const [pendingRaffleId, setPendingRaffleId] = useState<string | null>(null);
+    const pendingRaffleTypeRef = useRef<StatusType>('assDss');
     
     // Refs for Raffle
     const drawn7HRef = useRef<string[]>([]);
@@ -1187,7 +1188,7 @@ const App: React.FC = () => {
         }
     }, [isAdminRef, isDemoMode, selectedTurma, showNotification]);
 
-    const checkDssRaffle = useCallback((id: string) => {
+    const checkDssRaffle = useCallback((id: string, type: StatusType) => {
         if (!isSorteioActiveRef.current) return false;
 
         const employee = employeesRef.current.find(e => e.id === id);
@@ -1218,6 +1219,7 @@ const App: React.FC = () => {
 
         // Chance de 60% de solicitar matrícula de registro da DSS
         if (Math.random() < 0.6) {
+            pendingRaffleTypeRef.current = type;
             setPendingRaffleId(id);
             setActiveModal(ModalType.DssRaffle);
             return true;
@@ -1261,8 +1263,8 @@ const App: React.FC = () => {
             return;
         }
 
-        if (type === 'assDss' && isChecking && !isAdminRef.current) {
-            if (checkDssRaffle(id)) {
+        if ((type === 'assDss' || type === 'bem') && isChecking && !isAdminRef.current) {
+            if (checkDssRaffle(id, type)) {
                 return; // Raffle assumiu o fluxo
             }
         }
@@ -1295,7 +1297,7 @@ const App: React.FC = () => {
         const correctPassword = employee.senha || employee.matricula;
         
         if (password === correctPassword) {
-            if (!isAdminRef.current && checkDssRaffle(pendingEmployeeId)) {
+            if (!isAdminRef.current && checkDssRaffle(pendingEmployeeId, 'assDss')) {
                 // Raffle assumiu o fluxo. Limpa pendingEmployeeId para evitar
                 // conflito de estado entre SignaturePassword e DssRaffle.
                 setPendingEmployeeId(null);
@@ -1394,8 +1396,8 @@ const App: React.FC = () => {
 
     const handleDssRaffleCancel = useCallback(() => {
         if (pendingRaffleId) {
-            // Se ele cancela, apenas libera a assinatura normalmente, conforme o req "não é obrigatório".
-            processStatusUpdate(pendingRaffleId, 'assDss');
+            // Se ele cancela, apenas libera a marcação normalmente, conforme o req "não é obrigatório".
+            processStatusUpdate(pendingRaffleId, pendingRaffleTypeRef.current);
             setPendingRaffleId(null);
             setPendingEmployeeId(null);
             setActiveModal(ModalType.None);
@@ -1433,8 +1435,8 @@ const App: React.FC = () => {
             
             if (!success) return; // Se falhou (ex: matrícula inválida), não prossegue nem fecha o modal
 
-            // 3. Processar assinatura normal
-            processStatusUpdate(pendingRaffleId, 'assDss');
+            // 3. Processar a marcação com o tipo original (assDss ou bem)
+            processStatusUpdate(pendingRaffleId, pendingRaffleTypeRef.current);
             
             setPendingRaffleId(null);
             setPendingEmployeeId(null);
